@@ -13,8 +13,10 @@ namespace HelloWorld2
             // 2 player tic tac toe game, no AI.
 
             int move;
+            int turn = 0;
             bool player1Move = true;
             bool gameIsOn = true;
+            // Galima naudoti char array, mažiau atminties reikia.
             string[] ticTacToeGrid = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
             DrawGrid(ticTacToeGrid);
@@ -29,10 +31,13 @@ namespace HelloWorld2
 
                 move = CheckMove(ticTacToeGrid);
 
-                MakeMove(ticTacToeGrid, move, ref player1Move);
+                MakeMove(ticTacToeGrid, move, ref turn, ref player1Move);
+
+                turn++;
+
                 DrawGrid(ticTacToeGrid);
-                CheckWinner(ref ticTacToeGrid, ref player1Move, ref gameIsOn);
-                CheckDraw(ref ticTacToeGrid, ref player1Move, ref gameIsOn);
+                CheckWinner(ref ticTacToeGrid, ref player1Move, ref gameIsOn, ref turn);
+                CheckDraw(ref ticTacToeGrid, ref player1Move, ref gameIsOn, ref turn);
             }
 
             Console.Read();
@@ -71,7 +76,7 @@ namespace HelloWorld2
             return move;
         }
 
-        static void MakeMove(string[] grid, int move, ref bool player1Move)
+        static void MakeMove(string[] grid, int move, ref int turn, ref bool player1Move)
         {
             if (player1Move)
             {
@@ -83,10 +88,13 @@ namespace HelloWorld2
                 grid[move - 1] = "O";
                 player1Move = true;
             }
+
+            //turn++;
         }
 
-        static void CheckWinner(ref string[] grid, ref bool player1Move, ref bool gameIsOn)
+        static void CheckWinner(ref string[] grid, ref bool player1Move, ref bool gameIsOn, ref int turn)
         {
+            // Galima padaryti su foreach atskiriems char arba string.
             bool row1 = grid[0] == "X" && grid[1] == "X" && grid[2] == "X" || grid[0] == "O" && grid[1] == "O" && grid[2] == "O";
             bool row2 = grid[3] == "X" && grid[4] == "X" && grid[5] == "X" || grid[3] == "O" && grid[4] == "O" && grid[5] == "O";
             bool row3 = grid[6] == "X" && grid[7] == "X" && grid[8] == "X" || grid[6] == "O" && grid[7] == "O" && grid[8] == "O";
@@ -102,41 +110,33 @@ namespace HelloWorld2
             {
                 string winner = !player1Move ? "Player 1 WINS!!!" : "Player 2 WINS!!!";
                 Console.WriteLine(winner);
-                Replay(ref grid, ref player1Move, ref gameIsOn);
+                Replay(ref grid, ref player1Move, ref gameIsOn, ref turn);
             }
         }
 
-        static void CheckDraw(ref string[] grid, ref bool player1Move, ref bool gameIsOn)
+        static void CheckDraw(ref string[] grid, ref bool player1Move, ref bool gameIsOn, ref int turn)
         {
-            int validMoves = 9;
-
-            foreach (string square in grid)
-            {
-                if (square == "X" || square == "O")
-                {
-                    validMoves--;
-                }
-            }
-
-            if (validMoves == 0)
+            if (turn == 9 && gameIsOn)
             {
                 Console.WriteLine("It's a draw.");
-                Replay(ref grid, ref player1Move, ref gameIsOn);
+                Replay(ref grid, ref player1Move, ref gameIsOn, ref turn);
             }
         }
 
-        static void Replay(ref string[] grid, ref bool player1Move, ref bool gameIsOn)
+        static void Replay(ref string[] grid, ref bool player1Move, ref bool gameIsOn, ref int turn)
         {
             Console.WriteLine("For rematch enter 1, to exit press ENTER two times.");
             gameIsOn = Console.ReadLine() == "1";
 
             if (gameIsOn)
             {
+                // Galima sukurti atskira initialGrid array ir resetint su juo.
                 for (int i = 0; i < grid.Length; i++)
                 {
                     grid[i] = (i + 1).ToString();
                 }
 
+                turn = 0;
                 player1Move = true;
                 DrawGrid(grid);
             }
