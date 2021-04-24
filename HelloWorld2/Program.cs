@@ -11,21 +11,45 @@ namespace HelloWorld2
     {
         static void Main(string[] args)
         {
-            Employee employee = new Employee("Igor", "Pupa", 1000);
-            employee.Work();
-            employee.Pause();
-
-            Boss boss = new Boss("Tom", "Bos", "VW", 10000);
-            boss.Lead();
-            boss.Work();
-            boss.Pause();
-
-            Trainee trainee = new Trainee("Suka", "Nx", 50, 2, 6);
-            trainee.Learn();
-            trainee.Work();
-            trainee.Pause();
+            CalcCollectionSum(GetCollection(2));
 
             Console.ReadKey();
+        }
+
+        static IEnumerable<int> GetCollection(int option)
+        {
+            List<int> numbersList = new List<int>()
+            {
+                1, 2, 3, 4, 5
+            };
+
+            Queue<int> numbersQueue = new Queue<int>();
+            numbersQueue.Enqueue(6);
+            numbersQueue.Enqueue(7);
+            numbersQueue.Enqueue(8);
+            numbersQueue.Enqueue(9);
+            numbersQueue.Enqueue(10);
+
+            if (option == 1)
+            {
+                return numbersList;
+            }
+            else
+            {
+                return numbersQueue;
+            }
+        }
+
+        static void CalcCollectionSum(IEnumerable<int> collection)
+        {
+            int sum = 0;
+
+            foreach (int number in collection)
+            {
+                sum += number;
+            }
+
+            Console.WriteLine(sum);
         }
     }
 }
