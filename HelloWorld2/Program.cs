@@ -11,45 +11,42 @@ namespace HelloWorld2
     {
         static void Main(string[] args)
         {
-            CalcCollectionSum(GetCollection(2));
+            MakeSentence("Kurwa", "blet", "nx");
+
+            Console.WriteLine(GetMinVal(14, 3, 55, -20, 4003, 13, 0));
+
+            int[] min =
+            {
+                1, 23, 5, 16
+            };
+
+            Console.WriteLine(GetMinVal(min));
 
             Console.ReadKey();
         }
 
-        static IEnumerable<int> GetCollection(int option)
+        public static void MakeSentence(params string[] words)
         {
-            List<int> numbersList = new List<int>()
-            {
-                1, 2, 3, 4, 5
-            };
+            string sentence = "";
 
-            Queue<int> numbersQueue = new Queue<int>();
-            numbersQueue.Enqueue(6);
-            numbersQueue.Enqueue(7);
-            numbersQueue.Enqueue(8);
-            numbersQueue.Enqueue(9);
-            numbersQueue.Enqueue(10);
+            foreach (string word in words)
+            {
+                sentence += word + " ";
+            }
 
-            if (option == 1)
-            {
-                return numbersList;
-            }
-            else
-            {
-                return numbersQueue;
-            }
+            Console.WriteLine(sentence);
         }
 
-        static void CalcCollectionSum(IEnumerable<int> collection)
+        public static int GetMinVal(params int[] numbers)
         {
-            int sum = 0;
+            int min = int.MaxValue;
 
-            foreach (int number in collection)
+            foreach (int number in numbers)
             {
-                sum += number;
+                min = number < min ? number : min;
             }
 
-            Console.WriteLine(sum);
+            return min;
         }
     }
 }
