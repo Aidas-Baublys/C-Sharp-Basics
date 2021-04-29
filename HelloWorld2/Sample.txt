@@ -1,0 +1,49 @@
+﻿etstandard1.0
+netstandard1.1
+netstandard1.2
+netstandard1.3
+netstandard1.4
+netstandard1.5
+netstandard1.6
+netcoreapp1.0
+portable-net45-win8
+portable-win8-wpa8
+portable-net451-win81
+portable-net45-win8-wpa8-wpa81
+				
+
+
+
+
+
+The "params" Keyword for Params arrays
+
+2D Arrays Examples and Challenge
+
+		Generic and Non-generic Collections
+
+Hashtables
+
+Dictionaries
+
+Stacks vs Queues Presentation
+
+Stack<T> Examples and Challenge
+
+Queue<T> Example
+
+IEnumerable and IEnumerator
+
+Taking Advantage of IEnumerable
+
+Simple Inheritance Example
+
+The Virtual and Override Keywords
+
+Interfaces Example 1
+
+Interfaces VS Abstract Classes Presentation
+
+Part 1 Intro to Main Arguments string[] args
+
+Part 2 Main Arguments string[] args Handling User Input

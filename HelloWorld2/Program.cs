@@ -1,52 +1,61 @@
 ﻿using System;
+using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace HelloWorld2
 {
     class Program
     {
+        public delegate double PerfCalc(double a, double b);
+        public delegate string GetText(string name);
+
+        public static double Add(double a, double b)
+        {
+            Console.WriteLine(a + b);
+            return a + b;
+        }
+
+        public static double Divide(double a, double b)
+        {
+            Console.WriteLine(a / b);
+            return a / b;
+        }
+
+        public static double Sub(double a, double b)
+        {
+            Console.WriteLine(a - b);
+            return a - b;
+        }
+
         static void Main(string[] args)
         {
-            MakeSentence("Kurwa", "blet", "nx");
+            PerfCalc add = Add;
+            PerfCalc divide = Divide;
+            PerfCalc sub = Sub;
+            PerfCalc multiCalc = add + divide + sub;
+            multiCalc(10, 5);
 
-            Console.WriteLine(GetMinVal(14, 3, 55, -20, 4003, 13, 0));
+            PerfCalc a = (x, y) => x + y;
 
-            int[] min =
+            PerfCalc b = (x, y) => x * y;
+
+            GetText getText = delegate (string name)
             {
-                1, 23, 5, 16
+                return $"Hi, {name}.";
             };
 
-            Console.WriteLine(GetMinVal(min));
+            GetText text = (string name) => { return $"Nu nx {name}"; };
+
+            GetText t = name => $"Burka {name}";
+
+            Console.WriteLine(t("Kurwa"));
+            Console.WriteLine(b(5, 4));
 
             Console.ReadKey();
-        }
-
-        public static void MakeSentence(params string[] words)
-        {
-            string sentence = "";
-
-            foreach (string word in words)
-            {
-                sentence += word + " ";
-            }
-
-            Console.WriteLine(sentence);
-        }
-
-        public static int GetMinVal(params int[] numbers)
-        {
-            int min = int.MaxValue;
-
-            foreach (int number in numbers)
-            {
-                min = number < min ? number : min;
-            }
-
-            return min;
         }
     }
 }
