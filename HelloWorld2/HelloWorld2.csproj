@@ -67,6 +67,7 @@
     <Compile Include="Cube.cs" />
     <Compile Include="Dog.cs" />
     <Compile Include="DogShelter.cs" />
+    <Compile Include="DownloadHelper.cs" />
     <Compile Include="ElectricalDevice.cs" />
     <Compile Include="Employee.cs" />
     <Compile Include="Human.cs" />
